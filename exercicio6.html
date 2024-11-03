@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cálculo de Forças - Leis de Newton</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 350px;
+            text-align: center;
+        }
+        h1 {
+            margin-bottom: 20px;
+        }
+        label {
+            display: block;
+            margin-top: 10px;
+            text-align: left;
+        }
+        input {
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        button {
+            padding: 10px;
+            background-color: #ff97ef;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #98f6ff;
+        }
+        #resultado {
+            margin-top: 20px;
+            font-size: 18px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Calculadora de Força - Leis de Newton</h1>
+
+        <!-- Situação 1: Cálculo da força resultante -->
+        <h2>Força Resultante</h2>
+        <label for="massa">Massa do objeto (kg):</label>
+        <input type="number" id="massa" step="0.01" required>
+
+        <label for="aceleracao1">Aceleração 1 (m/s²):</label>
+        <input type="number" id="aceleracao1" step="0.01" required>
+
+        <label for="aceleracao2">Aceleração 2 (m/s²):</label>
+        <input type="number" id="aceleracao2" step="0.01" required>
+
+        <button type="button" onclick="calcularForcaResultante()">Calcular Força Resultante</button>
+
+        <!-- Situação 2: Cálculo da força de ação/reação -->
+        <h2>Força de Ação/Reação</h2>
+        <label for="massa1">Massa do objeto 1 (kg):</label>
+        <input type="number" id="massa1" step="0.01" required>
+
+        <label for="massa2">Massa do objeto 2 (kg):</label>
+        <input type="number" id="massa2" step="0.01" required>
+
+        <label for="aceleracaoObjeto1">Aceleração do objeto 1 (m/s²):</label>
+        <input type="number" id="aceleracaoObjeto1" step="0.01" required>
+
+        <label for="aceleracaoObjeto2">Aceleração do objeto 2 (m/s²):</label>
+        <input type="number" id="aceleracaoObjeto2" step="0.01" required>
+
+        <button type="button" onclick="calcularForcaAcaoReacao()">Calcular Força de Ação/Reação</button>
+
+        <div id="resultado"></div>
+    </div>
+
+    <script>
+        // Função para calcular a força resultante (Situação 1)
+        function calcularForcaResultante() {
+            let massa = parseFloat(document.getElementById("massa").value);
+            let aceleracao1 = parseFloat(document.getElementById("aceleracao1").value);
+            let aceleracao2 = parseFloat(document.getElementById("aceleracao2").value);
+
+            if (isNaN(massa) || isNaN(aceleracao1) || isNaN(aceleracao2)) {
+                document.getElementById("resultado").innerHTML = "Por favor, insira valores válidos.";
+                return;
+            }
+
+            let aceleracaoResultante = aceleracao1 - aceleracao2;
+            let forcaResultante = massa * aceleracaoResultante;
+
+            document.getElementById("resultado").innerHTML = "Força resultante: " + forcaResultante.toFixed(2) + " N";
+        }
+
+        // Função para calcular a força de ação/reação (Situação 2)
+        function calcularForcaAcaoReacao() {
+            let massa1 = parseFloat(document.getElementById("massa1").value);
+            let massa2 = parseFloat(document.getElementById("massa2").value);
+            let aceleracaoObjeto1 = parseFloat(document.getElementById("aceleracaoObjeto1").value);
+            let aceleracaoObjeto2 = parseFloat(document.getElementById("aceleracaoObjeto2").value);
+
+            if (isNaN(massa1) || isNaN(massa2) || isNaN(aceleracaoObjeto1) || isNaN(aceleracaoObjeto2)) {
+                document.getElementById("resultado").innerHTML = "Por favor, insira valores válidos.";
+                return;
+            }
+
+            // Força de ação no objeto 1
+            let forcaAcao = massa1 * aceleracaoObjeto1;
+            // Força de reação no objeto 2 (pela Terceira Lei de Newton, tem a mesma magnitude)
+            let forcaReacao = massa2 * aceleracaoObjeto2;
+
+            document.getElementById("resultado").innerHTML =
+                "Força de ação/reação: " + Math.max(forcaAcao, forcaReacao).toFixed(2) + " N (mesma magnitude, sentidos opostos)";
+        }
+    </script>
+</body>
+</html>

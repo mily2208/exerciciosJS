@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cálculo de Custo de Piso</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+        }
+
+        .container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 400px;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        label, p {
+            font-size: 16px;
+            color: #333;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #ff9bee;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #7ebdff;
+        }
+
+        .result {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Cálculo de Custo de Piso</h1>
+
+        <!-- Formulário para inserção das medidas -->
+        <label for="comprimento">Comprimento do cômodo (m):</label>
+        <input type="number" id="comprimento" placeholder="Ex: 5" required>
+
+        <label for="largura">Largura do cômodo (m):</label>
+        <input type="number" id="largura" placeholder="Ex: 4" required>
+
+        <button onclick="calcularCusto()">Calcular Custo</button>
+
+        <!-- Exibição do resultado -->
+        <div id="resultado" class="result"></div>
+    </div>
+
+    <script>
+        function calcularCusto() {
+            // Captura os valores de entrada
+            const comprimento = parseFloat(document.getElementById('comprimento').value);
+            const largura = parseFloat(document.getElementById('largura').value);
+            const precoPorMetroQuadrado = 36.00; // Preço do m² em reais
+
+            // Valida se os campos estão preenchidos corretamente
+            if (isNaN(comprimento) || isNaN(largura) || comprimento <= 0 || largura <= 0) {
+                alert("Por favor, insira valores válidos para comprimento e largura!");
+                return;
+            }
+
+            // Calcula a área e o custo total
+            const area = comprimento * largura;
+            const custoTotal = area * precoPorMetroQuadrado;
+
+            // Exibe o resultado na tela
+            const resultadoDiv = document.getElementById('resultado');
+            resultadoDiv.innerHTML = `
+                <p><strong>Área total:</strong> ${area.toFixed(2)} m²</p>
+                <p><strong>Custo total:</strong> R$ ${custoTotal.toFixed(2)}</p>
+            `;
+        }
+    </script>
+
+</body>
+</html>

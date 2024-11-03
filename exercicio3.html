@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vetor de 10 Números</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+        }
+
+        .container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 400px;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        label, p {
+            font-size: 16px;
+            color: #333;
+        }
+
+        input {
+            width: 60px;
+            padding: 10px;
+            margin: 5px;
+            font-size: 16px;
+            text-align: center;
+        }
+
+        button {
+            padding: 10px 20px;
+            margin-top: 20px;
+            font-size: 16px;
+            background-color: #ff9bee;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #7fbdff;
+        }
+
+        .result {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Vetor de 10 Números</h1>
+
+        <form id="numberForm">
+            <label for="numbers">Insira 10 números inteiros:</label><br>
+            <div id="inputsContainer"></div>
+            <button type="button" onclick="processarNumeros()">Processar</button>
+        </form>
+
+        <div id="resultados" class="result"></div>
+    </div>
+
+    <script>
+        // Cria 10 campos de entrada para os números
+        const inputsContainer = document.getElementById('inputsContainer');
+        for (let i = 0; i < 10; i++) {
+            const input = document.createElement('input');
+            input.type = 'number';
+            input.id = `num${i}`;
+            input.required = true;
+            inputsContainer.appendChild(input);
+        }
+
+        function processarNumeros() {
+            let numeros = [];
+            let soma = 0;
+            let menoresQueZero = 0;
+
+            // Lê os valores dos campos de entrada
+            for (let i = 0; i < 10; i++) {
+                const valor = parseInt(document.getElementById(`num${i}`).value);
+                numeros.push(valor);
+                soma += valor;
+
+                // Conta quantos números são menores que zero
+                if (valor < 0) {
+                    menoresQueZero++;
+                }
+            }
+
+            // Calcula a média
+            const media = soma / 10;
+
+            // Encontra os números maiores que a média
+            const maioresQueMedia = numeros.filter(num => num > media);
+
+            // Exibe os resultados
+            const resultadosDiv = document.getElementById('resultados');
+            resultadosDiv.innerHTML = `
+                <p><strong>Números maiores que a média (${media.toFixed(2)}):</strong> ${maioresQueMedia.length > 0 ? maioresQueMedia.join(', ') : 'Nenhum'}</p>
+                <p><strong>Número de elementos menores que zero:</strong> ${menoresQueZero}</p>
+            `;
+        }
+    </script>
+</body>
+</html>

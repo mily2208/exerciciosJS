@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cálculo de Predominância de Liga</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 350px;
+            text-align: center;
+        }
+        h1 {
+            margin-bottom: 20px;
+        }
+        label {
+            display: block;
+            margin-top: 10px;
+            text-align: left;
+        }
+        input {
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        button {
+            padding: 10px;
+            background-color: #ff89e9;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #99e9ff;
+        }
+        #resultado {
+            margin-top: 20px;
+            font-size: 18px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Verificar Predominância da Liga</h1>
+
+        <!-- Formulário para inserir porcentagens de metal e ametal -->
+        <label for="percentualMetal">Percentual de Metal (%):</label>
+        <input type="number" id="percentualMetal" step="0.01" required>
+
+        <label for="percentualAmetal">Percentual de Ametal (%):</label>
+        <input type="number" id="percentualAmetal" step="0.01" required>
+
+        <button type="button" onclick="verificarPredominancia()">Verificar Predominância</button>
+
+        <div id="resultado"></div>
+    </div>
+
+    <script>
+        function verificarPredominancia() {
+            // Obter os valores de entrada do usuário
+            let percentualMetal = parseFloat(document.getElementById("percentualMetal").value);
+            let percentualAmetal = parseFloat(document.getElementById("percentualAmetal").value);
+
+            // Verificar se as entradas são válidas
+            if (isNaN(percentualMetal) || isNaN(percentualAmetal)) {
+                document.getElementById("resultado").innerHTML = "Por favor, insira valores válidos.";
+                return;
+            }
+
+            // Verificar se a soma é igual a 100%
+            let somaPercentuais = percentualMetal + percentualAmetal;
+            if (somaPercentuais !== 100) {
+                document.getElementById("resultado").innerHTML = "A soma dos percentuais deve ser igual a 100%.";
+                return;
+            }
+
+            // Determinar se a liga é predominantemente metálica ou ametálica
+            if (percentualMetal > percentualAmetal) {
+                document.getElementById("resultado").innerHTML = "A liga é predominantemente metálica.";
+            } else if (percentualAmetal > percentualMetal) {
+                document.getElementById("resultado").innerHTML = "A liga é predominantemente ametálica.";
+            } else {
+                document.getElementById("resultado").innerHTML = "A liga tem uma proporção igual de metal e ametal.";
+            }
+        }
+    </script>
+</body>
+</html>

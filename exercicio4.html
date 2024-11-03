@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cálculo de Gasto de Combustível</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+        }
+
+        .container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 400px;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        label, p {
+            font-size: 16px;
+            color: #333;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            font-size: 16px;
+            text-align: center;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color:#ff9bee;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #9bd4ff;
+        }
+
+        .result {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Gasto de Combustível</h1>
+
+        <!-- Formulário para inserção dos valores -->
+        <label for="quilometragem">Quilometragem percorrida (km):</label>
+        <input type="number" id="quilometragem" placeholder="Ex: 150" required>
+
+        <label for="valorCombustivel">Valor do combustível (R$/litro):</label>
+        <input type="number" step="0.01" id="valorCombustivel" placeholder="Ex: 5.00" required>
+
+        <button onclick="calcularGasto()">Calcular Gasto</button>
+
+        <!-- Exibição do resultado -->
+        <div id="resultado" class="result"></div>
+    </div>
+
+    <script>
+        function calcularGasto() {
+            // Captura os valores de entrada
+            const quilometragem = parseFloat(document.getElementById('quilometragem').value);
+            const valorCombustivel = parseFloat(document.getElementById('valorCombustivel').value);
+
+            // Validação dos valores
+            if (isNaN(quilometragem) || isNaN(valorCombustivel) || quilometragem <= 0 || valorCombustivel <= 0) {
+                alert("Por favor, insira valores válidos!");
+                return;
+            }
+
+            // Cálculo: o veículo percorre 8 km/litro
+            const consumoLitros = quilometragem / 8;
+            const gastoTotal = consumoLitros * valorCombustivel;
+
+            // Exibe o resultado na tela
+            const resultadoDiv = document.getElementById('resultado');
+            resultadoDiv.innerHTML = `
+                <p><strong>Consumo de combustível:</strong> ${consumoLitros.toFixed(2)} litros</p>
+                <p><strong>Gasto total:</strong> R$ ${gastoTotal.toFixed(2)}</p>
+            `;
+        }
+    </script>
+
+</body>
+</html>

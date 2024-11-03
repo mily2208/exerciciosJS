@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cálculo de Ligações Químicas</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 400px;
+            text-align: center;
+        }
+        h1 {
+            margin-bottom: 20px;
+        }
+        label {
+            display: block;
+            margin-top: 10px;
+            text-align: left;
+        }
+        input {
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        button {
+            padding: 10px;
+            background-color: #ff67de;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #8eeeff;
+        }
+        #resultado {
+            margin-top: 20px;
+            font-size: 18px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Cálculo de Ligações Químicas</h1>
+
+        <!-- Seção para Ligações Iônicas -->
+        <h2>Ligações Iônicas</h2>
+        <label for="eletronsMetal">Elétrons a perder (metal):</label>
+        <input type="number" id="eletronsMetal" step="1" required>
+
+        <label for="eletronsAmetal">Elétrons a ganhar (ametal):</label>
+        <input type="number" id="eletronsAmetal" step="1" required>
+
+        <button type="button" onclick="calcularLigacaoIonica()">Calcular Ligação Iônica</button>
+
+        <!-- Seção para Ligações Covalentes -->
+        <h2>Ligações Covalentes</h2>
+        <label for="ligacoesAtomo1">Número de ligações do átomo 1:</label>
+        <input type="number" id="ligacoesAtomo1" step="1" required>
+
+        <label for="ligacoesAtomo2">Número de ligações do átomo 2:</label>
+        <input type="number" id="ligacoesAtomo2" step="1" required>
+
+        <button type="button" onclick="calcularLigacaoCovalente()">Calcular Ligação Covalente</button>
+
+        <div id="resultado"></div>
+    </div>
+
+    <script>
+        // Função para calcular a ligação iônica
+        function calcularLigacaoIonica() {
+            let eletronsMetal = parseInt(document.getElementById("eletronsMetal").value);
+            let eletronsAmetal = parseInt(document.getElementById("eletronsAmetal").value);
+
+            if (isNaN(eletronsMetal) || isNaN(eletronsAmetal)) {
+                document.getElementById("resultado").innerHTML = "Por favor, insira valores válidos.";
+                return;
+            }
+
+            // Calcular a fórmula mínima da ligação iônica
+            let proporcaoMetal = eletronsAmetal;
+            let proporcaoAmetal = eletronsMetal;
+
+            document.getElementById("resultado").innerHTML =
+                "Fórmula iônica: M" + proporcaoMetal + "A" + proporcaoAmetal;
+        }
+
+        // Função para calcular a ligação covalente
+        function calcularLigacaoCovalente() {
+            let ligacoesAtomo1 = parseInt(document.getElementById("ligacoesAtomo1").value);
+            let ligacoesAtomo2 = parseInt(document.getElementById("ligacoesAtomo2").value);
+
+            if (isNaN(ligacoesAtomo1) || isNaN(ligacoesAtomo2)) {
+                document.getElementById("resultado").innerHTML = "Por favor, insira valores válidos.";
+                return;
+            }
+
+            // Calcular a proporção de átomos na ligação covalente
+            let proporcaoAtomo1 = ligacoesAtomo2;
+            let proporcaoAtomo2 = ligacoesAtomo1;
+
+            document.getElementById("resultado").innerHTML =
+                "Fórmula molecular: A" + proporcaoAtomo1 + "B" + proporcaoAtomo2;
+        }
+    </script>
+</body>
+</html>

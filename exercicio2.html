@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Conversor de Temperatura</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+      background-color: #f3f3f3;
+    }
+    .container {
+      text-align: center;
+      max-width: 300px;
+      padding: 20px;
+      background-color: #fff;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+    input, select, button {
+      margin-top: 10px;
+      padding: 10px;
+      width: 100%;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+    }
+    button {
+      background-color: #ff6bbf;
+      color: white;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #8ef7ff;
+    }
+    .result {
+      margin-top: 15px;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Conversor de Temperatura</h2>
+    <input type="number" id="inputTemp" placeholder="Digite a temperatura">
+    <select id="scale">
+      <option value="celsius">Converter para Fahrenheit</option>
+      <option value="fahrenheit">Converter para Celsius</option>
+    </select>
+    <button onclick="convertTemperature()">Converter</button>
+    <div id="result" class="result"></div>
+  </div>
+
+  <script>
+    function convertTemperature() {
+      const tempInput = document.getElementById('inputTemp').value;
+      const scale = document.getElementById('scale').value;
+      const resultDiv = document.getElementById('result');
+
+      if (tempInput === "") {
+        resultDiv.innerHTML = "Por favor, insira uma temperatura.";
+        return;
+      }
+
+      const temperature = parseFloat(tempInput);
+      let convertedTemp;
+
+      if (scale === "celsius") {
+        convertedTemp = (temperature * 1.8) + 32;
+        resultDiv.innerHTML = `${temperature}°C = ${convertedTemp.toFixed(2)}°F`;
+      } else if (scale === "fahrenheit") {
+        convertedTemp = (temperature - 32) / 1.8;
+        resultDiv.innerHTML = `${temperature}°F = ${convertedTemp.toFixed(2)}°C`;
+      }
+    }
+  </script>
+</body>
+</html>
